@@ -7,6 +7,7 @@ import io.grpc.examples.chat.ChatServiceGrpc;
 import io.grpc.examples.chat.UserMessage;
 import io.grpc.examples.server.HelloWorldServer;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.stereotype.Component;
 
 /**
@@ -29,11 +30,12 @@ public class ChatServiceClient {
       stub = ChatServiceGrpc.newBlockingStub(channel);
   }
 
-  public UserMessage sendRequest(String name) {
+  public String sendRequest(String name) {
     try {
       log.info("Will try to greet user: {}", name);
-      UserMessage request = UserMessage.newBuilder().setBody(name).build();
-      return stub.sayHello(request);
+      UserMessage message = stub.sayHello(UserMessage.newBuilder().setBody(name).build());
+      log.info("Received messge from: {}", message.getBody());
+      return message.getBody();
     } catch (StatusRuntimeException e) {
       log.warn("RPC failed: {}", e.getStatus());
       throw new RuntimeException("Something went wrong");

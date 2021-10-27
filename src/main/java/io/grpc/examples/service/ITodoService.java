@@ -4,6 +4,6 @@ import io.grpc.examples.chat.UserMessage;
 
 public interface ITodoService {
 
-    UserMessage sendMessage();
+    String sendMessage();
 
 }

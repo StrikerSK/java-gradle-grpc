@@ -14,7 +14,7 @@ public class TodoGrpcService implements ITodoService {
     }
 
     @Override
-    public UserMessage sendMessage() {
+    public String sendMessage() {
         return client.sendRequest("Tester");
     }
 
