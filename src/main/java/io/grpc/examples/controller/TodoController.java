@@ -1,12 +1,8 @@
 package io.grpc.examples.controller;
 
-import io.grpc.examples.chat.UserMessage;
 import io.grpc.examples.service.ITodoService;
 import io.grpc.examples.service.TodoGrpcService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping("/")
 @RestController
@@ -18,10 +14,10 @@ public class TodoController {
         grpcService = new TodoGrpcService();
     }
 
-    @GetMapping("/message")
+    @GetMapping("/message/{username}")
     @ResponseBody
-    public String sendMessage() {
-        return grpcService.sendMessage();
+    public String sendMessage(@PathVariable String username) {
+        return grpcService.sendMessage(username);
     }
 
 }

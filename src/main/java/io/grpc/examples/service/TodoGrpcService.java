@@ -1,6 +1,5 @@
 package io.grpc.examples.service;
 
-import io.grpc.examples.chat.UserMessage;
 import io.grpc.examples.client.ChatServiceClient;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +13,8 @@ public class TodoGrpcService implements ITodoService {
     }
 
     @Override
-    public String sendMessage() {
-        return client.sendRequest("Tester");
+    public String sendMessage(String name) {
+        return client.sendRequest(name);
     }
 
 }

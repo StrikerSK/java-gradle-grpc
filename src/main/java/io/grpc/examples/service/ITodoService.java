@@ -1,9 +1,7 @@
 package io.grpc.examples.service;
 
-import io.grpc.examples.chat.UserMessage;
-
 public interface ITodoService {
 
-    String sendMessage();
+    String sendMessage(String name);
 
 }

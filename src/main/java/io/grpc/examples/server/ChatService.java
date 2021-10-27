@@ -6,7 +6,7 @@ import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class GreeterImpl extends ChatServiceGrpc.ChatServiceImplBase {
+public class ChatService extends ChatServiceGrpc.ChatServiceImplBase {
 
     @Override
     public void sayHello(UserMessage request, StreamObserver<UserMessage> responseObserver) {
