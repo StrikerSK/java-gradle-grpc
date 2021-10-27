@@ -1,20 +1,18 @@
 package io.grpc.examples.service;
 
-import io.grpc.examples.client.ChatServiceClient;
+import io.grpc.examples.client.TodoServiceClient;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class TodoGrpcService implements ITodoService {
 
-    private final ChatServiceClient client;
-
-    public TodoGrpcService() {
-        client = new ChatServiceClient();
-    }
+    private final TodoServiceClient client;
 
     @Override
-    public String sendMessage(String name) {
-        return client.sendRequest(name);
+    public String createTodo(String name, String description) {
+        return client.CreateTodo(name, description);
     }
 
 }
