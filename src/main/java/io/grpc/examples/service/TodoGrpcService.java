@@ -1,20 +1,20 @@
 package io.grpc.examples.service;
 
-import io.grpc.examples.client.HelloWorldClient;
-import io.grpc.examples.helloworld.HelloReply;
+import io.grpc.examples.chat.UserMessage;
+import io.grpc.examples.client.ChatServiceClient;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TodoGrpcService implements ITodoService {
 
-    private final HelloWorldClient client;
+    private final ChatServiceClient client;
 
     public TodoGrpcService() {
-        client = new HelloWorldClient();
+        client = new ChatServiceClient();
     }
 
     @Override
-    public HelloReply sendMessage() {
+    public UserMessage sendMessage() {
         return client.sendRequest("Tester");
     }
 

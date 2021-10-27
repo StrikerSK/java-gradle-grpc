@@ -1,6 +1,6 @@
 package io.grpc.examples.controller;
 
-import io.grpc.examples.helloworld.HelloReply;
+import io.grpc.examples.chat.UserMessage;
 import io.grpc.examples.service.ITodoService;
 import io.grpc.examples.service.TodoGrpcService;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ public class TodoController {
     }
 
     @GetMapping("/message")
-    public HelloReply sendMessage() {
+    public UserMessage sendMessage() {
         return grpcService.sendMessage();
     }
 

@@ -1,15 +1,14 @@
 package io.grpc.examples.server;
 
-import io.grpc.examples.helloworld.GreeterGrpc;
-import io.grpc.examples.helloworld.HelloReply;
-import io.grpc.examples.helloworld.HelloRequest;
+import io.grpc.examples.chat.ChatServiceGrpc;
+import io.grpc.examples.chat.UserMessage;
 import io.grpc.stub.StreamObserver;
 
-public class GreeterImpl extends GreeterGrpc.GreeterImplBase {
+public class GreeterImpl extends ChatServiceGrpc.ChatServiceImplBase {
 
     @Override
-    public void sayHello(HelloRequest req, StreamObserver<HelloReply> responseObserver) {
-        HelloReply reply = HelloReply.newBuilder().setMessage("Hello " + req.getName()).build();
+    public void sayHello(UserMessage request, StreamObserver<UserMessage> responseObserver) {
+        UserMessage reply = UserMessage.newBuilder().setBody("Hello " + request.getBody()).build();
         responseObserver.onNext(reply);
         responseObserver.onCompleted();
     }
