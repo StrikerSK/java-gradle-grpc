@@ -1,8 +1,7 @@
 plugins {
     id 'application'
-    id 'com.google.protobuf' version '0.8.19'
-    id 'org.springframework.boot' version '2.5.6'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.springframework.boot' version '2.7.4'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
     id 'idea'
     id 'java'
 }
@@ -18,27 +17,14 @@ repositories {
     mavenLocal()
 }
 
-// IMPORTANT: You probably want the non-SNAPSHOT version of gRPC. Make sure you
-// are looking at a tagged version of the example and not "master"!
-
-// Feel free to delete the comment at the next line. It is just for safely
-// updating the version in our release process.
-def grpcVersion = '1.49.1' // CURRENT_GRPC_VERSION
-def protobufVersion = '3.21.6'
-def protocVersion = protobufVersion
-
 dependencies {
+    implementation project(":todo-grpc-commons")
+
     // Spring Boot dependencies
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'net.devh:grpc-server-spring-boot-starter:2.13.1.RELEASE'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
-
-    //Protobuf dependencies
-    implementation "io.grpc:grpc-protobuf:${grpcVersion}"
-    implementation "io.grpc:grpc-stub:${grpcVersion}"
-    implementation "com.google.protobuf:protobuf-java-util:${protobufVersion}"
-    runtimeOnly "io.grpc:grpc-netty:${grpcVersion}"
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -46,7 +32,6 @@ dependencies {
     compileOnly "org.apache.tomcat:annotations-api:6.0.53"
     // examples/advanced need this for JsonFormat
 
-    testImplementation "io.grpc:grpc-testing:${grpcVersion}"
     testImplementation "junit:junit:4.13.2"
     testImplementation 'org.mockito:mockito-core:4.8.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -54,30 +39,6 @@ dependencies {
 
 dependencyManagement {
     imports {
-        mavenBom "io.grpc:grpc-bom:${grpcVersion}"
-    }
-}
-
-protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:${protocVersion}"
-    }
-    plugins {
-        grpc { artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}" }
-    }
-    generateProtoTasks {
-        all()*.plugins {
-            grpc {}
-        }
-    }
-}
-
-// Inform IDEs like IntelliJ IDEA, Eclipse or NetBeans about the generated code.
-sourceSets {
-    main {
-        java {
-            srcDirs 'todo-grpc-server/build/generated/source/proto/main/grpc'
-            srcDirs 'todo-grpc-server/build/generated/source/proto/main/java'
-        }
+        mavenBom "io.grpc:grpc-bom:1.49.1"
     }
 }

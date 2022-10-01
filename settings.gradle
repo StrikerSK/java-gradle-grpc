@@ -1,4 +1,5 @@
 rootProject.name = 'java-gradle-grpc'
 include 'todo-grpc-server'
 include 'todo-grpc-client'
+include 'todo-grpc-commons'
 
