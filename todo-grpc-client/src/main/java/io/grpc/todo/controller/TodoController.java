@@ -1,5 +1,6 @@
 package io.grpc.todo.controller;
 
+import io.grpc.todo.entity.TaskEntity;
 import io.grpc.todo.client.TodoServiceClient;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,10 @@ public class TodoController {
 
     private final TodoServiceClient grpcService;
 
-    @GetMapping("/todo")
+    @PostMapping(path = "/todo", consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public String createTodo() {
-        return grpcService.CreateTodo("First todo", "Description of first todo");
+    public String createTodo(@RequestBody TaskEntity taskEntity) {
+        return grpcService.CreateTodo(taskEntity.toGrpcTask());
     }
 
 }

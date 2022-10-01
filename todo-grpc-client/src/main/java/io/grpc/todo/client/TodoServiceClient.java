@@ -15,14 +15,9 @@ public class TodoServiceClient {
     @GrpcClient("todos")
     private TodoServiceGrpc.TodoServiceBlockingStub todoStub;
 
-    public String CreateTodo(String name, String description) {
+    public String CreateTodo(Todo todo) {
         try {
-            Todo requestMessage = Todo.newBuilder()
-                    .setName(name)
-                    .setDescription(description)
-                    .setDone(false)
-                    .build();
-            TodoRequest response = todoStub.createTodo(requestMessage);
+            TodoRequest response = todoStub.createTodo(todo);
             return response.getId();
         } catch (StatusRuntimeException e) {
             log.warn("RPC failed: {}", e.getStatus());
