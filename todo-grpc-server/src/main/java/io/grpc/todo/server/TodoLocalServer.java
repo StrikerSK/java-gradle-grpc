@@ -1,21 +1,22 @@
-package io.grpc.examples.server;
+package io.grpc.todo.server;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import io.grpc.todo.service.TodoConsoleService;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-public class ChatServiceServer {
+public class TodoLocalServer {
   private Server server;
 
   private void start() throws IOException {
     /* The port on which the server should run */
     int port = 9000;
     server = ServerBuilder.forPort(port)
-        .addService(new ChatService())
+        .addService(new TodoGrpcService(new TodoConsoleService()))
         .build()
         .start();
 
@@ -27,7 +28,7 @@ public class ChatServiceServer {
         // Use stderr here since the logger may have been reset by its JVM shutdown hook.
         System.err.println("*** shutting down gRPC server since JVM is shutting down");
         try {
-          ChatServiceServer.this.stop();
+          TodoLocalServer.this.stop();
         } catch (InterruptedException e) {
           e.printStackTrace(System.err);
         }
@@ -55,7 +56,7 @@ public class ChatServiceServer {
    * Main launches the server from the command line.
    */
   public static void main(String[] args) throws IOException, InterruptedException {
-    final ChatServiceServer server = new ChatServiceServer();
+    final TodoLocalServer server = new TodoLocalServer();
     server.start();
     server.blockUntilShutdown();
   }

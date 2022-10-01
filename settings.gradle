@@ -1,2 +1,3 @@
-rootProject.name = 'another-java-grpc'
+rootProject.name = 'java-gradle-grpc'
+include 'todo-grpc-server'
 
