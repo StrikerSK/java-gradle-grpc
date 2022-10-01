@@ -52,6 +52,12 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "io.grpc:grpc-bom:${grpcVersion}"
+    }
+}
+
 protobuf {
     protoc {
         artifact = "com.google.protobuf:protoc:${protocVersion}"
