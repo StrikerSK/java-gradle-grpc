@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class TaskServiceClient {
+public class TaskServiceClient implements ITaskServiceClient {
 
     @GrpcClient("tasks")
     private TaskServiceGrpc.TaskServiceBlockingStub stub;
 
-    public String CreateTask(Task task) {
+    public String createTask(Task task) {
         try {
             TaskRequest response = stub.createTask(task);
             return response.getId();
