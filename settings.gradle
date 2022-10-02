@@ -1,2 +1,5 @@
-rootProject.name = 'another-java-grpc'
+rootProject.name = 'java-gradle-grpc'
+include 'task-grpc-server'
+include 'task-grpc-client'
+include 'task-grpc-commons'
 

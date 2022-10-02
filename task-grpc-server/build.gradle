@@ -1,0 +1,44 @@
+plugins {
+    id 'application'
+    id 'org.springframework.boot' version '2.7.4'
+    id 'io.spring.dependency-management' version '1.0.14.RELEASE'
+    id 'idea'
+    id 'java'
+}
+
+group 'io.grpc.todo'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    maven { // The google mirror is less flaky than mavenCentral()
+        url "https://maven-central.storage-download.googleapis.com/maven2/"
+    }
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation project(":task-grpc-commons")
+
+    // Spring Boot dependencies
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'net.devh:grpc-server-spring-boot-starter:2.13.1.RELEASE'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    compileOnly "org.apache.tomcat:annotations-api:6.0.53"
+    // examples/advanced need this for JsonFormat
+
+    testImplementation "junit:junit:4.13.2"
+    testImplementation 'org.mockito:mockito-core:4.8.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "io.grpc:grpc-bom:1.49.1"
+    }
+}
