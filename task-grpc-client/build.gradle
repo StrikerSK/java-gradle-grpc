@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    implementation project(":todo-grpc-commons")
+    implementation project(":task-grpc-commons")
 
     // Spring Boot dependencies
     implementation 'org.springframework.boot:spring-boot-starter'
