@@ -6,7 +6,7 @@ plugins {
     id 'java'
 }
 
-group 'io.grpc.todo'
+group 'io.grpc.task.client'
 version '0.0.1-SNAPSHOT'
 
 repositories {

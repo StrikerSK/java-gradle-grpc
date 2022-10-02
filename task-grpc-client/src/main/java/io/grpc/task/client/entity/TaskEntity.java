@@ -1,6 +1,6 @@
-package io.grpc.todo.entity;
+package io.grpc.task.client.entity;
 
-import io.grpc.todo.Todo;
+import io.grpc.task.proto.Task;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -14,8 +14,8 @@ public class TaskEntity {
     private String description;
     private List<String> tags = new ArrayList<>();
 
-    public Todo toGrpcTask() {
-        return Todo.newBuilder()
+    public Task toGrpcTask() {
+        return Task.newBuilder()
                 .setId(id)
                 .setName(name)
                 .setDescription(description)

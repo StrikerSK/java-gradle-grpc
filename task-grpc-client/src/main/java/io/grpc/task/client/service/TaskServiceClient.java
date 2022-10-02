@@ -1,23 +1,23 @@
-package io.grpc.todo.client;
+package io.grpc.task.client.service;
 
 import io.grpc.StatusRuntimeException;
-import io.grpc.todo.Todo;
-import io.grpc.todo.TodoRequest;
-import io.grpc.todo.TodoServiceGrpc;
+import io.grpc.task.proto.Task;
+import io.grpc.task.proto.TaskRequest;
+import io.grpc.task.proto.TaskServiceGrpc;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class TodoServiceClient {
+public class TaskServiceClient {
 
-    @GrpcClient("todos")
-    private TodoServiceGrpc.TodoServiceBlockingStub todoStub;
+    @GrpcClient("tasks")
+    private TaskServiceGrpc.TaskServiceBlockingStub stub;
 
-    public String CreateTodo(Todo todo) {
+    public String CreateTask(Task task) {
         try {
-            TodoRequest response = todoStub.createTodo(todo);
+            TaskRequest response = stub.createTask(task);
             return response.getId();
         } catch (StatusRuntimeException e) {
             log.warn("RPC failed: {}", e.getStatus());

@@ -30,6 +30,7 @@ message TodoList {
 service TodoService {
   rpc CreateTodo(Todo) returns(TodoRequest) {}
   rpc UpdateTodo(Todo) returns(google.protobuf.Empty) {}
+  rpc DeleteTodo(TodoRequest) returns(google.protobuf.Empty) {}
   rpc GetTodo(TodoRequest) returns(Todo) {}
   rpc GetTodos(google.protobuf.Empty) returns(TodoList) {}
 }
