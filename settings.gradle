@@ -1,5 +1,5 @@
 rootProject.name = 'java-gradle-grpc'
-include 'todo-grpc-server'
+include 'task-grpc-server'
 include 'task-grpc-client'
 include 'todo-grpc-commons'
 
