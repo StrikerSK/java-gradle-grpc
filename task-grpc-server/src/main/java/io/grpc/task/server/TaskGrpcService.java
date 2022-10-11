@@ -14,22 +14,22 @@ import static io.grpc.task.proto.TaskServiceGrpc.*;
 @GrpcService
 public class TaskGrpcService extends TaskServiceImplBase {
 
-    private final ITaskService todoService;
+    private final ITaskService taskService;
 
-    public TaskGrpcService(ITaskService todoService) {
-        this.todoService = todoService;
+    public TaskGrpcService(ITaskService taskService) {
+        this.taskService = taskService;
     }
 
     @Override
     public void createTask(Task task, StreamObserver<TaskRequest> responseObserver) {
         try {
-            String id = todoService.createTask(task);
+            String id = taskService.createTask(task);
             responseObserver.onNext(TaskRequest.newBuilder().setId(id).build());
             responseObserver.onCompleted();
         } catch (Exception e) {
-            log.error("Error while creating todo", e);
+            log.error("Error while creating task", e);
             responseObserver.onError(Status.INTERNAL
-                    .withDescription("Error while adding todo")
+                    .withDescription("Error while adding task")
                     .withCause(e)
                     .asRuntimeException());
         }
@@ -38,13 +38,13 @@ public class TaskGrpcService extends TaskServiceImplBase {
     @Override
     public void readTask(TaskRequest request, StreamObserver<Task> responseObserver) {
         try {
-            Task task = todoService.readTask(request.getId());
+            Task task = taskService.readTask(request.getId());
             responseObserver.onNext(task);
             responseObserver.onCompleted();
         } catch (Exception e) {
-            log.error("Error while reading todo", e);
+            log.error("Error while reading task", e);
             responseObserver.onError(Status.INTERNAL
-                    .withDescription("Error while reading todo")
+                    .withDescription("Error while reading task")
                     .withCause(e)
                     .asRuntimeException());
         }

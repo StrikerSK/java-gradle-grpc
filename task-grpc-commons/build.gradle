@@ -6,7 +6,7 @@ plugins {
     id 'java'
 }
 
-group 'io.grpc.todo'
+group 'io.grpc.task'
 version '0.0.1-SNAPSHOT'
 
 repositories {
@@ -64,8 +64,8 @@ protobuf {
 sourceSets {
     main {
         java {
-            srcDirs 'todo-grpc-server/build/generated/source/proto/main/grpc'
-            srcDirs 'todo-grpc-server/build/generated/source/proto/main/java'
+            srcDirs 'build/generated/source/proto/main/grpc'
+            srcDirs 'build/generated/source/proto/main/java'
         }
     }
 }

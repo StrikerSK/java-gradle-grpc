@@ -6,5 +6,5 @@ To run the application you need to have installed Java 17 and Gradle 6.8.3.
 
 Firstly you need to run the application server with the following command:
 ```shell
-gradle :todo-grpc-server:bootRun
+gradle :task-grpc-server:bootRun
 ```

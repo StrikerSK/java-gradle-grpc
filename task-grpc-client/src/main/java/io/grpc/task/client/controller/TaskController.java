@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/")
 @RestController
 @AllArgsConstructor
-public class TodoController {
+public class TaskController {
 
     private final ITaskServiceClient grpcService;
 
     @PostMapping(path = "/task", consumes = "application/json", produces = "application/json")
     @ResponseBody
-    public String createTodo(@RequestBody TaskEntity taskEntity) {
+    public String createTask(@RequestBody TaskEntity taskEntity) {
         return grpcService.createTask(taskEntity.toGrpcTask());
     }
 
