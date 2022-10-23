@@ -2,6 +2,7 @@ package io.grpc.task.server;
 
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
+import io.grpc.task.commons.exception.NotFoundException;
 import io.grpc.task.proto.Task;
 import io.grpc.task.proto.TaskRequest;
 import io.grpc.task.service.ITaskService;
@@ -41,6 +42,11 @@ public class TaskGrpcService extends TaskServiceImplBase {
             Task task = taskService.readTask(request.getId());
             responseObserver.onNext(task);
             responseObserver.onCompleted();
+        } catch (NotFoundException e){
+            log.error("Task {} cannot be found", request.getId(), e);
+            responseObserver.onError(Status.NOT_FOUND
+                    .withDescription(String.format("Task [%s] not found", request.getId()))
+                    .asRuntimeException());
         } catch (Exception e) {
             log.error("Error while reading task", e);
             responseObserver.onError(Status.INTERNAL

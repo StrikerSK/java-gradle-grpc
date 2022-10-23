@@ -1,4 +1,29 @@
 plugins {
     id 'idea'
     id 'java'
+
+}
+
+def lombokVersion = '1.18.24'
+
+allprojects() {
+    apply plugin: 'idea'
+    apply plugin: 'java'
+
+
+    repositories {
+        maven { // The google mirror is less flaky than mavenCentral()
+            url "https://maven-central.storage-download.googleapis.com/maven2/"
+        }
+        mavenCentral()
+        mavenLocal()
+    }
+
+    group('io.grpc.task')
+    version('1.0.0-SNAPSHOT')
+
+    dependencies {
+        compileOnly "org.projectlombok:lombok:${lombokVersion}"
+        annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    }
 }
